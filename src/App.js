@@ -9,6 +9,8 @@ import PopularMovie from "./components/PopularMovie";
 import PopularTV from "./components/PopularTV";
 import PageNotFound from "./components/PageNotFound";
 import { MovieDetails } from "./components/MovieDetails";
+import TVDetails from "./components/TVDetails";
+import { Search } from "./components/Search";
 import useParams from "react-router-dom";
 
 export const App = () => {
@@ -19,7 +21,10 @@ export const App = () => {
         <Route path="/" element={<NowPlaying />} />
         <Route path="movies/popular" element={<PopularMovie />} />
         <Route path="moviedetails/:id" element={<MovieDetails />} />
+        <Route path="tvdetails/:id" element={<TVDetails />} />
         <Route path="tv/popular" element={<PopularTV />} />
+        <Route path="search?" element={<Search />} />
+
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

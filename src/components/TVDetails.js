@@ -3,21 +3,22 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const MovieDetails = () => {
+export const TVDetails = () => {
   const [movie, setMovies] = useState([]);
   const [genre, setGenre] = useState([]);
   const [companies, setCompanies] = useState([]);
+  const [LastEpisodeToAir, setLastEpisodeToAir] = useState([]);
   const id = window.location.pathname.split("/")[2];
-  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=ba443e63c90864d5dffb2a2255267b7e&language=en-US`;
+  const url = `https://api.themoviedb.org/3/tv/${id}?api_key=ba443e63c90864d5dffb2a2255267b7e&language=en-US`;
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        // console.log(data);
         setMovies(data);
         setGenre(data.genres);
         setCompanies(data.production_companies);
+        setLastEpisodeToAir(data.last_episode_to_air);
       } catch (error) {
         console.log("error", error);
       }
@@ -34,13 +35,13 @@ export const MovieDetails = () => {
         <img src={imgSrc} />
         <div>
           <h2 className="text-center font-bold text-3xl uppercase mb-5">
-            {movie.title}
+            {movie.name}
           </h2>
           <p className="text-lg mb-3 text-left">
-            Rating {movie.vote_average} / 10
+            Rating: {movie.vote_average} / 10
           </p>
           <p className="text-lg mb-5 text-left">
-            Release Date: {movie.release_date}
+            Last Air Date: {movie.last_air_date}
           </p>
           <p className="text-left mb-6">{movie.overview}</p>
           <p className="text-left mt-5 text-yellow-400 text-lg">Genres</p>
@@ -50,7 +51,7 @@ export const MovieDetails = () => {
             ))}
           </ul>
           <Link to={movie.homepage} className="text-left">
-            Visit Movie Homepage
+            Visit Show Homepage
           </Link>
         </div>
       </div>
@@ -59,14 +60,12 @@ export const MovieDetails = () => {
       </div>
       <div className="container mx-auto px-4 text-lg">
         <div>
-          <span className="text-yellow-400">Budget:</span> {movie.budget}
+          <span className="text-yellow-400">Number of Episodes:</span>{" "}
+          {movie.number_of_episodes}
         </div>
         <div>
-          <span className="text-yellow-400">Revenue: </span>
-          {movie.revenue}
-        </div>
-        <div>
-          <span className="text-yellow-400">Runtime:</span> {movie.runtime}
+          <span className="text-yellow-400">Last Episode to Air: </span>
+          {LastEpisodeToAir.name}
         </div>
         <div>
           <span className="text-yellow-400">Status: </span>
@@ -76,7 +75,7 @@ export const MovieDetails = () => {
         <p className="text-left">
           {companies.map((company) => (
             <span key={Math.floor(Math.random() * 1000000)}>
-              {company.name},{" "}
+              {company.name},
             </span>
           ))}
         </p>
@@ -84,4 +83,4 @@ export const MovieDetails = () => {
     </>
   );
 };
-export default MovieDetails;
+export default TVDetails;

@@ -1,5 +1,6 @@
 // import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import NoImage from "../assets/no-image.jpg";
 export const MovieCard = ({ movie }) => {
   //   const navigate = useNavigate();
   const title = movie.title;
@@ -9,7 +10,7 @@ export const MovieCard = ({ movie }) => {
   return (
     <div className="mb-4">
       <Link to={linkId}>
-        <img src={imgSrc} alt={title} />
+        <img src={movie.poster_path !== null ? imgSrc : NoImage} alt={title} />
 
         <div className="swiper-rating overflow-hidden text-left bg-black py-3 px-2">
           <h4 className="overflow-hidden font-bold">{title}</h4>
@@ -19,3 +20,4 @@ export const MovieCard = ({ movie }) => {
     </div>
   );
 };
+export default MovieCard;

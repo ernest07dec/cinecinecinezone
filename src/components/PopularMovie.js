@@ -3,9 +3,9 @@ import { useState } from "react";
 import { MovieCard } from "./MovieCard";
 const NowPlaying = () => {
   const [movies, setMovies] = useState([]);
+  const url =
+    "https://api.themoviedb.org/3/movie/popular?api_key=ba443e63c90864d5dffb2a2255267b7e&language=en-US";
   useEffect(() => {
-    const url =
-      "https://api.themoviedb.org/3/movie/popular?api_key=ba443e63c90864d5dffb2a2255267b7e&language=en-US";
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -16,7 +16,7 @@ const NowPlaying = () => {
       }
     };
     fetchData();
-  });
+  }, [url]);
   return (
     <>
       <h2 className="text-center font-bold text-4xl">POPULAR MOVIES</h2>
