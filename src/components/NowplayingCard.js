@@ -1,5 +1,6 @@
 // import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import NoImage from "../assets/no-image.jpg";
 export const NowPlayingCard = ({ movie }) => {
   //   const navigate = useNavigate();
   const id = movie.id;
@@ -9,7 +10,10 @@ export const NowPlayingCard = ({ movie }) => {
   return (
     <div className="mb-4">
       <Link to={linkId}>
-        <img src={imgSrc} alt={movie.title} />
+        <img
+          src={movie.poster_path !== null ? imgSrc : NoImage}
+          alt={movie.title}
+        />
 
         <h4 className="swiper-rating font-bold py-2 bg-black">
           <i className="fas fa-star text-secondary"></i> {movie.vote_average} /
